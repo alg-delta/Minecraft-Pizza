@@ -108,7 +108,7 @@ def sum():
     selected_quantities = {
         int(key): value for key, value in session.get('dop_quantities', {}).items()
     }
-    total_price= sushi.price = main.price
+    total_price= sushi.price + main.price
     for dop in dops:
         count = selected_quantities.get(dop.id, 1)
         total_price += dop.price * count
