@@ -4,7 +4,7 @@ def create_db():
     from models import db, Sushi, Main, Dop
 
     with app.app_context():
-        db.drop_all() # видаляє всі таблиці (для навчання)
+        # db.drop_all() # видаляє всі таблиці (для навчання)
         db.create_all()  # створює заново
 
         if not Sushi.query.first():
