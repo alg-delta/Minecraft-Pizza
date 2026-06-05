@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Конструктор Піци - Крок 3</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+
+        <h1>Крок 3: Додаткові опції та контактні дані</h1>
+
+        <form method="POST" action="{{ url_for('step3') }}">
+            <h2>Приправи:</h2>
+            <div class="options-grid">
+                {% for dop in dops %}
+                    <label class="option-card">
+                        <input type="checkbox"
+                               class="dop-checkbox"
+                               name="dop"
+                               value="{{ dop.id }}"
+                               {% if selected_dop_ids and dop.id in selected_dop_ids %}checked{% endif %}>
+                        <div class="card-content">
+                            <img src="{{ url_for('static', filename=dop.image) }}"
+                                 alt="{{ dop.name }}"
+                                 class="option-image">
+                            <h3>{{ dop.name }}</h3>
+                            <p class="price">${{ "%.2f"|format(dop.price) }}</p>
+                             <!-- кількість -->
+                            <input type="number"
+                                   name="count_{{ dop.id }}"
+                                   min="1"
+                                   value="{{ selected_quantities.get(dop.id, 1) if selected_quantities else 1 }}"
+                                   class="quantity-input"
+                                   id="count_{{ dop.id }}">
+                        </div>
+                    </label>
+                {% endfor %}
+            </div>
+
+            <h2>Контактні Дані:</h2>
+            <div class="contact-form">
+                <div class="input-group">
+                    <label for="name">Ваше Ім'я:</label>
+                    <input type="text" id="name" name="name"
+                           value="{{ name }}" class="text-input"> {# 'required' видалено #}
+                </div>
+                <div class="input-group">
+                    <label for="phone">Номер Телефону:</label>
+                    <input type="tel" id="phone" name="phone"
+                           value="{{ phone }}" class="text-input"> {# 'required' видалено #}
+                </div>
+                <div class="input-group">
+                    <label for="comment">Додатковий Коментар до замовлення:</label>
+                    <textarea id="comment" name="comment" rows="4" class="text-input">{{ comment }}</textarea>
+                </div>
+            </div>
+
+            <a href="{{ url_for('step2') }}" class="btn btn-secondary">Назад</a>
+            <button type="submit" class="btn btn-primary">Далі</button>
+
+        </form>
+    </div>
+
+<script>
+// чекаємо, поки завантажиться сторінка
+document.addEventListener("DOMContentLoaded", function () {
+
+    // знаходимо всі чекбокси допів
+    const checkboxes = document.querySelectorAll(".dop-checkbox");
+
+    checkboxes.forEach(cb => {
+        const id = cb.value; // id допа
+        const countInput = document.getElementById("count_" + id); // поле кількості
+
+        // при завантаженні показуємо/ховаємо поле
+        if (countInput) {
+            countInput.style.display = cb.checked ? "block" : "none";
+        }
+
+        // при зміні чекбокса
+        cb.addEventListener("change", function () {
+            if (!countInput) return; // якщо поля нема — нічого не робимо
+
+            if (cb.checked) {
+                countInput.style.display = "block"; // показати поле
+                countInput.value = 1; // значення за замовчуванням
+            } else {
+                countInput.style.display = "none"; // сховати поле
+                countInput.value = 1; // скинути значення
+            }
+        });
+    });
+});
+</script>
+</body>
+</html>

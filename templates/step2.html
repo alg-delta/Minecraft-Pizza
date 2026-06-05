@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Конструктор Піци - Крок 2</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+
+        <h1>Крок 2: Оберіть основний інгредієнт</h1>
+
+        <form method="POST" action="{{ url_for('step2') }}">
+            <div class="options-grid">
+                {% for main in mains %}
+                    <label class="option-card">
+                        {# radio buttons мають однакове ім'я (name) для групи,
+                           а значення (value) - це ID інгредієнта.
+                           Додано 'checked' для збереження попереднього вибору #}
+                        <input type="radio" name="main" value="{{ main.id }}"
+                               {% if selected_main_id and selected_main_id == main.id %}checked{% endif %} required>
+                        <div class="card-content">
+                            <img src="{{ url_for('static', filename=main.image) }}" alt="{{ main.name }}" class="option-image">
+                            <h3>{{ main.name }}</h3>
+                            <p class="price">${{ "%.2f"|format(main.price) }}</p>
+                        </div>
+                    </label>
+                {% endfor %}
+            </div>
+             <a href="{{ url_for('step1') }}" class="btn btn-secondary">Назад</a>
+            <button type="submit" class="btn btn-primary">Далі</button>
+        </form>
+    </div>
+</body>
+</html>

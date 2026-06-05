@@ -1,0 +1,446 @@
+/* static/style.css */
+
+/* Імпорт піксельного шрифту для повної атмосфери Minecraft */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+
+/* Визначення CSS-змінних для основних 6 кольорів у стилі Minecraft */
+:root {
+    --color-primary: #5c8e32;       /* Зелений блок трави (акценти, кнопки, суші) */
+    --color-primary-dark: #4a7227;  /* Темніша трава / листя (для ховеру) */
+    --color-secondary: #c6c6c6;     /* Світло-сірий інтерфейс інвентарю (UI) */
+    --color-text: #e0e0e0;             /* Світлий текст, як у чаті Minecraft на темному фоні */
+    --color-background: #1a1a1a;    /* Дуже темний сірий (як фон меню або глибока печера) */
+    --color-surface: #2c2c2c;       /* Колір обтесаного каменю/кругляка для карток */
+
+    /* Додаткові службові кольори */
+    --color-error: #ff2222;         /* Яскравий редстоун / колір отримання шкоди */
+    --color-success-bg: #3fc31e;    /* Колір досвіду (XP) */
+    --color-success-text: #000000;
+    --color-danger-bg: #e74c3c;     /* Колір динаміту (TNT) */
+    --color-danger-text: #ffffff;
+}
+
+body {
+    font-family: 'VT323', monospace; /* Головний читабельний ретро-шрифт */
+    background-color: var(--color-background);
+    /* Текстура бекграунду в стилі "dirt" або темного UI (можна замінити на колір) */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)),
+                      url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewBox="0 0 4 4"><rect width="4" height="4" fill="%234a3b2c"/><rect width="2" height="2" fill="%233a2f23"/><rect x="2" y="2" width="2" height="2" fill="%232e241b"/></svg>');
+    background-size: 16px 16px;
+    image-rendering: pixelated;
+    color: var(--color-text);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.container {
+    background-color: #4c4c4c; /* Класичний сірий колір меню Minecraft */
+    padding: 30px;
+    /* Об'ємна піксельна рамка інтерфейсу (Minecraft GUI border) */
+    border: 4px solid #000;
+    box-shadow: inset -4px -4px 0px #212121,
+                inset 4px 4px 0px #8b8b8b,
+                0 10px 0px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    max-width: 800px;
+    width: 100%;
+    margin-top: 50px;
+}
+
+h1 {
+    font-family: 'Press Start 2P', cursive; /* Справжній кубічний шрифт заголовків */
+    font-size: 1.8em;
+    color: #ffff55; /* Жовтий колір тексту, як у Splash-текстах або назвах предметів */
+    text-shadow: 3px 3px 0px #3f3f00; /* Піксельна тінь */
+    margin-bottom: 30px;
+}
+
+h2 {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1em;
+    color: #ffffff;
+    text-shadow: 2px 2px 0px #3f3f3f;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    border-bottom: 4px dashed #212121; /* Розділювач у стилі блоків */
+    padding-bottom: 10px;
+}
+
+p {
+    font-size: 1.5em;
+    line-height: 1.4;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 0px #111;
+}
+
+.description-text {
+    font-size: 1.2em;
+    color: #aaa; /* Світло-сірий підказковий текст */
+    margin-bottom: 20px;
+}
+
+/* Кнопки у стилі кнопок меню Minecraft */
+.btn {
+    display: inline-block;
+    font-family: 'VT323', monospace;
+    font-size: 1.6em;
+    text-shadow: 2px 2px 0px #2a2a2a;
+    color: #e0e0e0;
+    padding: 10px 20px;
+    margin: 10px;
+    border: 3px solid #000;
+    background-color: #707070;
+    /* Ефект об'єму кнопки */
+    box-shadow: inset -3px -3px 0px #4a4a4a,
+                inset 3px 3px 0px #aeaeae;
+    text-decoration: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: none; /* У майнкрафті немає плавності, все різко і чітко */
+}
+
+/* Кнопка вибору (зелена) */
+.btn-primary {
+    background-color: #5c8e32;
+    box-shadow: inset -3px -3px 0px #3a591f,
+                inset 3px 3px 0px #82c547;
+}
+
+/* Друрядна кнопка (темно-сіра) */
+.btn-secondary {
+    background-color: #4a4a4a;
+    box-shadow: inset -3px -3px 0px #212121,
+                inset 3px 3px 0px #707070;
+}
+
+/* Ховер ефект — кнопка підсвічується синім/блакитним, як в оригінальній грі */
+.btn:hover, .btn-primary:hover, .btn-secondary:hover {
+    background-color: #52678e;
+    color: #ffffa0;
+    border-color: #000;
+    box-shadow: inset -3px -3px 0px #35435c,
+                inset 3px 3px 0px #7ea2dd;
+    transform: none; /* Прибираємо плавне підняття для збереження стилю */
+}
+
+/* Коли кнопка затиснута */
+.btn:active {
+    box-shadow: inset 3px 3px 0px #212121,
+                inset -3px -3px 0px #707070;
+}
+
+
+/* Сітка опцій (Слоти інвентарю) */
+.options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+/* Картка як слот інвентарю */
+.option-card {
+    background-color: #8b8b8b; /* Колір внутрішньої частини слоту */
+    border: 4px solid #373737;
+    box-shadow: inset 3px 3px 0px #555555,
+                inset -3px -3px 0px #c6c6c6;
+    padding: 15px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    box-sizing: border-box;
+}
+
+/* Ховер на картку — рамка стає білою/світлою, як виділений слот */
+.option-card:hover {
+    border-color: #ffffff;
+    background-color: #9c9c9c;
+}
+
+/* Приховуємо дефолтні інпути */
+.option-card input[type="radio"],
+.option-card input[type="checkbox"] {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    opacity: 0;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    z-index: 2;
+}
+
+/* Кастомні піксельні чекбокси */
+.option-card input[type="radio"] + .card-content::before,
+.option-card input[type="checkbox"] + .card-content::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #000;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #4a4a4a;
+    box-shadow: inset -2px -2px 0px #212121, inset 2px 2px 0px #707070;
+    z-index: 1;
+}
+
+/* Радіо-кнопки квадратні або злегка зрізані (у Майнкрафті немає ідеальних кіл) */
+.option-card input[type="radio"] + .card-content::before {
+    border-radius: 0px;
+}
+
+.option-card input[type="checkbox"] + .card-content::before {
+    border-radius: 0px;
+}
+
+/* Стан Checked (активований редстоун або зелений індикатор) */
+.option-card input[type="radio"]:checked + .card-content::before,
+.option-card input[type="checkbox"]:checked + .card-content::before {
+    background-color: #5c8e32;
+    box-shadow: inset -2px -2px 0px #3a591f, inset 2px 2px 0px #82c547;
+}
+
+/* Маркер для Радіо (зелений внутрішній квадрат) */
+.option-card input[type="radio"]:checked + .card-content::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background-color: #ffff55;
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    z-index: 1;
+}
+
+/* Маркер для Чекбоксу */
+.option-card input[type="checkbox"]:checked + .card-content::after {
+    content: '✔';
+    font-family: 'Press Start 2P', cursive;
+    color: #ffff55;
+    font-size: 12px;
+    position: absolute;
+    top: 13px;
+    right: 13px;
+    line-height: 20px;
+    text-align: center;
+    z-index: 1;
+}
+
+/* Підсвічування всієї картки, якщо вона вибрана */
+.option-card:has(input:checked) {
+    border-color: #ffff55; /* Золота рамка для вибраного предмета */
+    background-color: #a5a5a5;
+    box-shadow: 0 0 10px #ffff55;
+}
+
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+/* Очищення згладжування для зображень, щоб вони виглядали піксельно */
+.option-image {
+    max-width: 100px;
+    height: auto;
+    border: 3px solid #000;
+    background-color: #4a4a4a;
+    margin-bottom: 10px;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+.option-card h3 {
+    font-size: 1.4em;
+    color: #000000; /* Назви предметів у чорному кольорі, як текст в інвентарі */
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.option-card p {
+    font-size: 1.1em;
+    color: #3f3f3f; /* Темний опис */
+    text-shadow: none;
+    margin-bottom: 10px;
+    min-height: 35px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.option-card .price {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8em;
+    font-weight: bold;
+    color: #ffff55; /* Золоті монети / ціна */
+    text-shadow: 2px 2px 0px #000;
+    margin-top: auto;
+    margin-bottom: 0;
+}
+
+
+/* Поля вводу (Стиль вікна чату / консолі) */
+.contact-form {
+    text-align: left;
+    max-width: 500px;
+    margin: 0 auto 30px auto;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 1.3em;
+    margin-bottom: 5px;
+    color: #ffffff;
+    text-shadow: 2px 2px 0px #000;
+}
+
+.input-group .required {
+    color: var(--color-error);
+}
+
+.text-input, .quantity-input {
+    font-family: 'VT323', monospace;
+    font-size: 1.4em;
+    width: calc(100% - 20px);
+    padding: 8px;
+    background-color: #000000; /* Чорне поле чату */
+    color: #ffffff;
+    border: 3px solid #a8a8a8;
+    border-radius: 0px; /* Тільки гострі кути */
+    box-sizing: border-box;
+}
+
+.text-input:focus, .quantity-input:focus {
+    border-color: #ffffff; /* Біла рамка при фокусі */
+    outline: none;
+    box-shadow: none;
+}
+
+.quantity-input {
+    width: 90px;
+    text-align: center;
+}
+
+.error-message {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8em;
+    color: var(--color-error);
+    text-shadow: 2px 2px 0px #000;
+    margin-bottom: 20px;
+}
+
+
+/* Flash-повідомлення */
+.flashes {
+    list-style-type: none;
+    padding: 15px;
+    margin: 20px 0;
+    border: 3px solid #000;
+    text-align: center;
+    font-size: 1.4em;
+}
+
+.flashes li {
+    margin-bottom: 5px;
+}
+
+.flashes .success {
+    background-color: var(--color-success-bg);
+    color: var(--color-success-text);
+    box-shadow: inset -3px -3px 0px #2fa316, inset 3px 3px 0px #6be44d;
+}
+
+.flashes .danger {
+    background-color: var(--color-danger-bg);
+    color: var(--color-danger-text);
+    box-shadow: inset -3px -3px 0px #b03022, inset 3px 3px 0px #f17062;
+}
+
+
+/* Сторінка підсумку */
+.summary-details {
+    text-align: left;
+    margin-bottom: 30px;
+    border: 4px solid #212121;
+    padding: 20px;
+    border-radius: 0px;
+    background-color: #313131; /* Темніша панель */
+    box-shadow: inset 3px 3px 0px #1a1a1a;
+}
+
+.summary-details ul {
+    list-style-type: square; /* Квадратні маркери списку */
+    padding-left: 20px;
+    margin: 0;
+}
+
+.summary-details ul li {
+    margin-bottom: 10px;
+    font-size: 1.5em;
+    text-shadow: 2px 2px 0px #000;
+}
+
+.summary-details ul ul {
+    margin-top: 5px;
+    margin-left: 20px;
+    list-style-type: dashed;
+}
+
+.summary-details ul ul li {
+    font-size: 0.9em;
+    color: #ffff55; /* Золотий підтекст для вибраних елементів */
+}
+
+.total-price {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.5em;
+    color: #5c8e32; /* Зелений колір як рівні досвіду (XP) */
+    text-shadow: 2px 2px 0px #000;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.summary-actions {
+    margin-top: 30px;
+}
+
+
+/* Адаптивність */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+        margin-top: 15px;
+        border-width: 3px;
+    }
+    h1 {
+        font-size: 1.3em;
+    }
+    .options-grid {
+        grid-template-columns: 1fr;
+    }
+    .option-card p {
+        min-height: auto;
+    }
+    .contact-form {
+        max-width: 100%;
+    }
+}

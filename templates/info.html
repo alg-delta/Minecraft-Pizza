@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Цитатник</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+    <style>
+        /* Стиль для всього екрана: робимо фон у вигляді патерну бруду (dirt) */
+        body {
+            background-color: #3c3c3c;
+            /* Генерація піксельного бекграунду за допомогою CSS */
+            background-image:
+                linear-gradient(45deg, #2c2c2c 25%, transparent 25%, transparent 75%, #2c2c2c 75%, #2c2c2c),
+                linear-gradient(45deg, #2c2c2c 25%, #3c3c3c 25%, #3c3c3c 75%, #2c2c2c 75%, #2c2c2c);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+
+            font-family: 'Press Start 2P', monospace;
+            color: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-shadow: 3px 3px 0px #2c2c2c; /* Ефект тіні тексту, як у грі */
+        }
+
+        /* Контейнер для цитати у стилі вікна інтерфейсу (GUI) */
+        .minecraft-container {
+            background-color: rgba(16, 16, 16, 0.85);
+            border: 4px solid #373737;
+            outline: 4px solid #000000;
+            box-shadow: inset -4px -4px 0px #555555, inset 4px 4px 0px #8f8f8f;
+            padding: 30px;
+            max-width: 600px;
+            text-align: center;
+            margin: 20px;
+        }
+
+        /* Текст самої цитати (зелений, як текст успіху або досвіду) */
+        .quote-text {
+            color: #55FF55;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            word-wrap: break-word;
+        }
+
+        /* Кнопка у стилі стандартної кнопки Minecraft */
+        .minecraft-btn {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 14px;
+            color: #E0E0E0;
+            background-color: #868686;
+            border: 2px solid #000000;
+            box-shadow: inset -4px -4px 0px #565656, inset 4px 4px 0px #AEAEAE;
+            padding: 12px 20px;
+            cursor: pointer;
+            text-shadow: 2px 2px 0px #000000;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        /* Ефект наведення на кнопку (як у грі — підсвічується синім/голубим) */
+        .minecraft-btn:hover {
+            background-color: #7a8a9e;
+            color: #ffff55;
+            box-shadow: inset -4px -4px 0px #4c5766, inset 4px 4px 0px #a4b3c6;
+        }
+
+        /* Ефект натискання */
+        .minecraft-btn:active {
+            box-shadow: inset 4px 4px 0px #4c5766, inset -4px -4px 0px #a4b3c6;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="minecraft-container">
+        <p class="quote-text">"{{ quote.text }}"</p>
+
+        <button class="minecraft-btn" onclick="window.location.reload();">ЗГЕНЕРУВАТИ НОВУ</button>
+        <a href="/" class="minecraft-btn">На головну</a>
+    </div>
+
+</body>
+</html>

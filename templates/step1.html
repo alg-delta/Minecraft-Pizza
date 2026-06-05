@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Конструктор Піци - Крок 1</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Крок 1: Оберіть тип піци</h1>
+
+
+        <form method="POST" action="{{ url_for('step1') }}">
+            <div class="options-grid">
+{% for sushi in sushis %}
+                    <label class="option-card">
+                        <input type="radio" name="sushi" value="{{sushi.id}}" required>
+                        <div class="card-content">
+                            <img src="{{ url_for('static', filename=sushi.image) }}" alt="{{sushi.name}}" class="option-image">
+                            <h3>{{sushi.name}}</h3>
+                            <p>{{sushi.description}}</p>
+                            <p class="price">{{sushi.price}}</p>
+                        </div>
+                    </label>
+{% endfor %}
+            </div>
+            <button type="submit" class="btn btn-primary">Далі</button>
+        </form>
+        <a href="/" class="btn btn-secondary">На головну</a>
+    </div>
+</body>
+</html>
